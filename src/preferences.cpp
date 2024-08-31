@@ -804,10 +804,13 @@ namespace preferences
 	{
 		boost::uuids::detail::sha1 hash;
 		hash.process_bytes(pword.c_str(), pword.length());
-		unsigned int digest[5];
+		unsigned char digest[20];
 		hash.get_digest(digest);
 		std::stringstream str;
-		str << std::hex << std::setfill('0')  << std::setw(sizeof(unsigned int)*2) << digest[0] << digest[1] << digest[2] << digest[3] << digest[4];
+		str << std::hex << std::setfill('0');
+		for(int n = 0; n < 20; ++n) {
+			str << std::setw(2) << static_cast<int>(digest[n]);
+		}
 		password_ = str.str();
 	}
 

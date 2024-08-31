@@ -2,6 +2,7 @@
 #include <sstream>
 
 #include <boost/filesystem/operations.hpp>
+#include <boost/system/system_error.hpp>
 
 #include <GL/glew.h>
 
@@ -814,7 +815,7 @@ COMMAND_LINE_UTILITY(update_launcher)
 				timeout_ms = 10000000;
 			}
 		}
-	} catch(const boost::filesystem::filesystem_error& e) {
+	} catch(const boost::system::system_error& e) {
 		ASSERT_LOG(false, "File Error: " << e.what());
 	}
 }

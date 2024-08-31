@@ -5711,11 +5711,11 @@ std::map<std::string, variant>& get_doc_cache(bool prefs_dir) {
 		const std::string& s = v.as_string();
 		boost::uuids::detail::sha1 hash;
 		hash.process_bytes(s.c_str(), s.length());
-		unsigned int digest[5];
+		unsigned char digest[20];
 		hash.get_digest(digest);
 		std::stringstream str;
-		for(int n = 0; n < 5; ++n) {
-			str << std::hex << std::setw(8) << std::setfill('0') << digest[n];
+		for(int n = 0; n < 20; ++n) {
+			str << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(digest[n]);
 		}
 		return variant(str.str());
 	END_FUNCTION_DEF(sha1)

@@ -38,7 +38,7 @@ namespace xhtml
 				createTask(std::launch::deferred, [filename]() -> std::string {
 					try {
 						return sys::read_file(filename);
-					} catch(const boost::filesystem::filesystem_error& e) {
+					} catch(const boost::system::system_error& e) {
 						LOG_ERROR("Unable to read file: " << e.what());
 						return "";
 					}
